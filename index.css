@@ -1,0 +1,11 @@
+.badge-error {
+  background-color: #b94a48;
+}
+
+.badge-success {
+  background-color: #468847;
+}
+
+.list-group {
+    margin-bottom: 0;
+}
