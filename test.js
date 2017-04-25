@@ -72,7 +72,12 @@ var TEST = (function() {
         li.innerHTML = resultHtml;
 
       } catch (error) {
-        panel.classList.add('panel-danger');
+        if (++failCount == 1) {
+          panel.classList.add('panel-danger');
+          if (hadSuccess) {
+            panel.classList.remove('panel-info');
+          }
+        }
         li.classList.add('list-group-item-danger');
         li.innerHTML = '<pre>' + error.stack + '</pre>';
       }
