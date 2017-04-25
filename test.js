@@ -16,7 +16,7 @@ var TEST = (function() {
     var funcName = func.name;
 
     var panel = document.createElement('div');
-    panel.classList.add('panel', 'panel-info');
+    panel.classList.add('panel');
 
     var panelHeading = document.createElement('div');
     panelHeading.classList.add('panel-heading');
@@ -35,6 +35,9 @@ var TEST = (function() {
 
     document.getElementById('results').appendChild(panel);
 
+    var failCount = 0;
+    var hadSuccess = false;
+
     for (var i = 0; i < testArgs.length; i++) {
 
       var li = document.createElement('li');
@@ -45,23 +48,40 @@ var TEST = (function() {
         var result = func.apply(this, testArgs[i].args);
 
         var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + ') { ... } ';
+
         if (testArgs[i].expected === result) {
+
           resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
+          if (!hadSuccess && failCount == 0) {
+            panel.classList.add('panel-info');
+            hadSuccess = true;
+          }
+
         } else {
+
           resultHtml += '<span class="badge badge-error">' + result +
             '&nbsp;&nbsp;\u2718  ( Expected: ' + testArgs[i].expected + ' )</span>';
+          if (++failCount > 0) {
+            panel.classList.add('panel-danger');
+            if (hadSuccess) {
+              panel.classList.remove('panel-info');
+            }
+          }
         }
 
         li.innerHTML = resultHtml;
 
       } catch (error) {
-        panel.classList.remove('panel-info');
         panel.classList.add('panel-danger');
         li.classList.add('list-group-item-danger');
         li.innerHTML = '<pre>' + error.stack + '</pre>';
       }
 
       results.appendChild(li);
+    }
+
+    if (failCount > 0 ) {
+      panelHeading.textContent += ' - ' + failCount + ' Test Failure(s)';
     }
 
     await sleep((numTests++) * 150);
