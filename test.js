@@ -20,7 +20,7 @@ var TEST = (function() {
 
     var panelHeading = document.createElement('div');
     panelHeading.classList.add('panel-heading');
-    panelHeading.textContent = funcName;
+    panelHeading.textContent = 'Excercise ' + numTests + ' (' + funcName + ')';
 
     var panelBody = document.createElement('div');
     panelBody.classList.add('panel-body');
@@ -44,7 +44,7 @@ var TEST = (function() {
 
         var result = func.apply(this, testArgs[i].args);
 
-        var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + '): ';
+        var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + ') { ... } ';
         if (testArgs[i].expected === result) {
           resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
         } else {
