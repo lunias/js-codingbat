@@ -2,14 +2,14 @@ var TEST = (function() {
 
   var test = {};
 
-	////////////////////// Support Code //////////////////////
+  ////////////////////// Support Code //////////////////////
 
-	test.Test = function(args, expected) {
-  	this.args = args;
+  test.Test = function(args, expected) {
+    this.args = args;
     this.expected = expected;
   };
 
-	test.test = function(func, testArgs) {
+  test.test = function(func, testArgs) {
 
     var funcName = func.name;
 
@@ -35,21 +35,21 @@ var TEST = (function() {
 
     for (var i = 0; i < testArgs.length; i++) {
 
-  		var result = func.apply(this, testArgs[i].args);
-    	var li = document.createElement('li');
+      var result = func.apply(this, testArgs[i].args);
+      var li = document.createElement('li');
       li.classList.add('list-group-item');
 
       var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + '): ';
       if (testArgs[i].expected === result) {
-      	resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
+        resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
       } else {
         resultHtml += '<span class="badge badge-error">' + result +
           '&nbsp;&nbsp;\u2718  ( Expected: ' + testArgs[i].expected + ' )</span>';
       }
 
       li.innerHTML = resultHtml;
-  		results.appendChild(li);
-		}
+      results.appendChild(li);
+    }
   };
 
   return test;

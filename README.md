@@ -1,6 +1,6 @@
 # js-codingbat
 
-This is a very simple project for checking your answers to codingbat exercises implemented in JavaScript 
+This is a very simple project for checking your answers to codingbat exercises implemented in JavaScript
 
 Example of how to write answers to the exercises and test them:
 
@@ -10,13 +10,13 @@ Example of how to write answers to the exercises and test them:
   // Warmup-1 > sleepIn
 
   var sleepInTests = [
-  	new Test([false, false], true),
-  	new Test([true, false], false),
-  	new Test([false, true], true)
+    new Test([false, false], true),
+    new Test([true, false], false),
+    new Test([false, true], true)
   ];
 
   function sleepIn(weekday, vacation) {
-  	return !weekday || vacation;
+    return !weekday || vacation;
   }
 
   test(sleepIn, sleepInTests);
@@ -24,17 +24,17 @@ Example of how to write answers to the exercises and test them:
   // Warmup-1 > monkeyTrouble
 
   var monkeyTroubleTests = [
-  	new Test([true, true], true),
+    new Test([true, true], true),
     new Test([false, false], true),
     new Test([true, false], false)
   ];
 
   function monkeyTrouble(aSmile, bSmile) {
-  	return aSmile && bSmile || !aSmile && !bSmile;
+    return aSmile && bSmile || !aSmile && !bSmile;
   }
 
   test(monkeyTrouble, monkeyTroubleTests);
-  
+
 })(TEST.Test, TEST.test);
 ```
 
