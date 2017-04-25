@@ -2,6 +2,8 @@ var TEST = (function() {
 
   var test = {};
 
+  var numTests = 0;
+
   ////////////////////// Support Code //////////////////////
 
   test.Test = function(args, expected) {
@@ -9,7 +11,7 @@ var TEST = (function() {
     this.expected = expected;
   };
 
-  test.test = function(func, testArgs) {
+  test.test = async function(func, testArgs) {
 
     var funcName = func.name;
 
@@ -61,7 +63,14 @@ var TEST = (function() {
 
       results.appendChild(li);
     }
+
+    await sleep((numTests++ - 1) * 150);
+    panel.classList.add('fade');
   };
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   return test;
 
