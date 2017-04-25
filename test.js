@@ -52,7 +52,7 @@ var TEST = (function() {
         if (testArgs[i].expected === result) {
 
           resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
-          if (!hadSuccess && failCount == 0) {
+          if (failCount == 0 && !hadSuccess) {
             panel.classList.add('panel-info');
             hadSuccess = true;
           }
@@ -61,7 +61,7 @@ var TEST = (function() {
 
           resultHtml += '<span class="badge badge-error">' + result +
             '&nbsp;&nbsp;\u2718  ( Expected: ' + testArgs[i].expected + ' )</span>';
-          if (++failCount > 0) {
+          if (++failCount == 1) {
             panel.classList.add('panel-danger');
             if (hadSuccess) {
               panel.classList.remove('panel-info');
