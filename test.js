@@ -64,7 +64,7 @@ var TEST = (function() {
       results.appendChild(li);
     }
 
-    await sleep((numTests++ - 1) * 150);
+    await sleep((numTests++) * 150);
     panel.classList.add('fade');
   };
 
