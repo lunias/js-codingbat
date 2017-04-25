@@ -60,7 +60,7 @@ var TEST = (function() {
         } else {
 
           resultHtml += '<span class="badge badge-error">' + result +
-            '&nbsp;&nbsp;\u2718  ( Expected: ' + testArgs[i].expected + ' )</span>';
+            ' ( Expected: ' + testArgs[i].expected + ' )&nbsp;&nbsp;\u2718</span>';
           if (++failCount == 1) {
             panel.classList.add('panel-danger');
             if (hadSuccess) {
