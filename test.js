@@ -67,6 +67,7 @@ var TEST = (function() {
               panel.classList.remove('panel-info');
             }
           }
+          li.classList.add('list-group-item-danger');
         }
 
         li.innerHTML = resultHtml;
