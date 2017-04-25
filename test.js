@@ -35,19 +35,30 @@ var TEST = (function() {
 
     for (var i = 0; i < testArgs.length; i++) {
 
-      var result = func.apply(this, testArgs[i].args);
       var li = document.createElement('li');
       li.classList.add('list-group-item');
 
-      var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + '): ';
-      if (testArgs[i].expected === result) {
-        resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
-      } else {
-        resultHtml += '<span class="badge badge-error">' + result +
-          '&nbsp;&nbsp;\u2718  ( Expected: ' + testArgs[i].expected + ' )</span>';
+      try {
+
+        var result = func.apply(this, testArgs[i].args);
+
+        var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + '): ';
+        if (testArgs[i].expected === result) {
+          resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
+        } else {
+          resultHtml += '<span class="badge badge-error">' + result +
+            '&nbsp;&nbsp;\u2718  ( Expected: ' + testArgs[i].expected + ' )</span>';
+        }
+
+        li.innerHTML = resultHtml;
+
+      } catch (error) {
+        panel.classList.remove('panel-info');
+        panel.classList.add('panel-danger');
+        li.classList.add('list-group-item-danger');
+        li.innerHTML = '<pre>' + error.stack + '</pre>';
       }
 
-      li.innerHTML = resultHtml;
       results.appendChild(li);
     }
   };
