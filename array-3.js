@@ -25,28 +25,16 @@
 
   test(maxSpan, maxSpanTests);
 
-  // Array-3 > fix34
+  // fixNums Helper (works, but doesn't keep in place)
 
-  let fix34Tests = [
-    new Test([[1, 3, 1, 4]], [1, 3, 4, 1]),
-    new Test([[1, 3, 1, 4, 4, 3, 1]], [1, 3, 4, 1, 1, 3, 4]),
-    new Test([[3, 2, 2, 4]], [3, 4, 2, 2])
-  ];
-
-  function fix34(nums) {
-
-    // [1, 3, 1, 4, 4, 3, 1]
-    // [{'3':1,'4':3},{'3':5,'4':4}]
-    // {'1': 3, '5': 4}
-    // [1, 3, 4, 1, 3, 4, 1]
-
+  function fixNums(nums, num1, num2) {
     let locs = nums.reduce((locs, num, i) => {
-      if (num === 3) {
-        let four = locs.find(loc => !loc['3']);
-        four ? four['3'] = i : locs.push({'3': i});
-      } else if (num === 4) {
-        let three = locs.find(loc => !loc['4']);
-        three ? three['4'] = i : locs.push({'4': i});
+      if (num === num1) {
+        let one = locs.find(loc => !loc[num1]);
+        one ? one[num1] = i : locs.push({[num1]: i});
+      } else if (num === num2) {
+        let two = locs.find(loc => !loc[num2]);
+        two ? two[num2] = i : locs.push({[num2]: i});
       }
       return locs;
     }, []);
@@ -67,6 +55,18 @@
     }, []);
 
     return fixed;
+  }
+
+  // Array-3 > fix34
+
+  let fix34Tests = [
+    new Test([[1, 3, 1, 4]], [1, 3, 4, 1]),
+    new Test([[1, 3, 1, 4, 4, 3, 1]], [1, 3, 4, 1, 1, 3, 4]),
+    new Test([[3, 2, 2, 4]], [3, 4, 2, 2])
+  ];
+
+  function fix34(nums) {
+    return fixNums(nums, 3, 4);
   }
 
   test(fix34, fix34Tests);
