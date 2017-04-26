@@ -46,12 +46,14 @@ var TEST = (function() {
       try {
 
         var result = func.apply(this, testArgs[i].args);
+        var jsonResult = JSON.stringify(result);
+        var jsonExpected = JSON.stringify(testArgs[i].expected);
 
-        var resultHtml = funcName + '(' + testArgs[i].args.join(', ') + ') { ... } ';
+        var resultHtml = funcName + '(' + JSON.stringify(testArgs[i].args[0]) + ') { ... } ';
 
-        if (testArgs[i].expected === result) {
+        if (jsonExpected === jsonResult) {
 
-          resultHtml += '<span class="badge badge-success">' + result + '&nbsp;&nbsp;\u2714</span>';
+          resultHtml += '<span class="badge badge-success">' + jsonResult + '&nbsp;&nbsp;\u2714</span>';
           if (failCount == 0 && !hadSuccess) {
             panel.classList.add('panel-info');
             hadSuccess = true;
@@ -59,8 +61,8 @@ var TEST = (function() {
 
         } else {
 
-          resultHtml += '<span class="badge badge-error">' + result +
-            ' ( Expected: ' + testArgs[i].expected + ' )&nbsp;&nbsp;\u2718</span>';
+          resultHtml += '<span class="badge badge-error">' + jsonResult +
+            ' ( Expected: ' + jsonExpected + ' )&nbsp;&nbsp;\u2718</span>';
           if (++failCount == 1) {
             panel.classList.add('panel-danger');
             if (hadSuccess) {

@@ -2,7 +2,7 @@
 
   // Warmup-1 > sleepIn
 
-  var sleepInTests = [
+  let sleepInTests = [
     new Test([false, false], true),
     new Test([true, false], false),
     new Test([false, true], true)
@@ -16,7 +16,7 @@
 
   // Warmup-1 > monkeyTrouble
 
-  var monkeyTroubleTests = [
+  let monkeyTroubleTests = [
     new Test([true, true], true),
     new Test([false, false], true),
     new Test([true, false], false)
@@ -30,7 +30,7 @@
 
   // Warmup-1 > sumDouble
 
-  var sumDoubleTests = [
+  let sumDoubleTests = [
     new Test([1, 2], 3),
     new Test([3, 2], 5),
     new Test([2, 2], 8)
@@ -41,5 +41,21 @@
   }
 
   test(sumDouble, sumDoubleTests);
+
+  // Warmup-1 > diff21
+
+  let diff21Tests = [
+    new Test([19], 2),
+    new Test([10], 11),
+    new Test([21], 0),
+    new Test([25], 8)
+  ];
+
+  function diff21(n) {
+    let av = Math.abs(n - 21);
+    return n > 21 ? 2 * av : av;
+  }
+
+  test(diff21, diff21Tests);
 
 })(TEST.Test, TEST.test);
