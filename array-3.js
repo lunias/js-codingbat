@@ -66,4 +66,111 @@
     new Test([[1, 4, 1, 5, 5, 4, 1]], [1, 4, 5, 1, 1, 4, 5])
   ]);
 
+  // Array-3 > canBalance
+
+  function canBalance(nums) {
+    const sum = (a, b) => a + b;
+    for (let i = 0; i < nums.length; i++) {
+      let leftSum = nums.slice(0, i + 1).reduce(sum, 0);
+      let rightSum =  nums.slice(i + 1, nums.length).reduce(sum, 0);
+      if (leftSum === rightSum) return true;
+    }
+    return false;
+  }
+
+  test(canBalance, [
+    new Test([[1, 1, 1, 2, 1]], true),
+    new Test([[2, 1, 1, 2, 1]], false),
+    new Test([[10, 10]], true),
+    new Test([[1]], false)
+  ]);
+
+  // Array-3 > linearIn
+
+  function linearIn(outer, inner) {
+    for (let i = 0; i < inner.length; i++) {
+      for (let j = i; j < outer.length; j++) {
+        if (inner[i] < outer[j]) return false;
+        if (inner[i] == outer[j]) break;
+      }
+    }
+    return true;
+  }
+
+  test(linearIn, [
+    new Test([[1, 2, 4, 6], [2, 4]], true),
+    new Test([[1, 2, 4, 6], [2, 3, 4]], false),
+    new Test([[1, 2, 4, 4, 6], [2, 4]], true),
+    new Test([[-1, 0, 3, 3, 3, 10, 12], [-1, 10, 11]], false)
+  ]);
+
+  // Array-3 > squareUp
+
+  function squareUp(n) {
+    let result = [];
+    for (let i = 0; i < n; i++) {
+      a = new Array(n).fill(0);
+      for (let j = n - 1; j >= n - i - 1; j--) {
+        a[j] = n-j;
+      }
+      result.push(a);
+    }
+    return [].concat.apply([], result);
+  }
+
+  test(squareUp, [
+    new Test([3], [0, 0, 1, 0, 2, 1, 3, 2, 1]),
+    new Test([2], [0, 1, 2, 1]),
+    new Test([4], [0, 0, 0, 1, 0, 0, 2, 1, 0, 3, 2, 1, 4, 3, 2, 1])
+  ]);
+
+  // Array-3 > seriesUp
+
+  function seriesUp(n) {
+    let a = [];
+    for (let i = 0; i < n + 1; i++) {
+      for (let j = 1; j < i + 1; j++) {
+        a.push(j);
+      }
+    }
+    return a;
+  }
+
+  test(seriesUp, [
+    new Test([3], [1, 1, 2, 1, 2, 3]),
+    new Test([4], [1, 1, 2, 1, 2, 3, 1, 2, 3, 4]),
+    new Test([2], [1, 1, 2]),
+    new Test([5], [1, 1, 2, 1, 2, 3, 1, 2, 3, 4, 1, 2, 3, 4, 5]),
+    new Test([1], [1]),
+    new Test([0], [])
+  ]);
+
+  // Array-3 > maxMirror
+
+  function maxMirror(nums) {
+    let slices = [];
+    for (let i = 1; i < nums.length; i++) {
+      slices[i] = nums.slice(0, i);
+    }
+
+    for (let i = slices.length - 1; i > 0; i--) {
+      let hitCount = 0;
+      for (let j = nums.length - 1; j >= 0; j--) {
+        if (nums[j] === slices[i][hitCount]) {
+          if (++hitCount === i) return i;
+        } else {
+          hitCount = 0;
+        }
+      }
+    }
+
+    return 0;
+  }
+
+  test(maxMirror, [
+    new Test([[1, 2, 3, 8, 9, 3, 2, 1]], 3),
+    new Test([[1, 2, 1, 4]], 3),
+    new Test([[7, 1, 2, 9, 7, 2, 1]], 2)
+  ]);
+
 })(TEST.Test, TEST.test);
