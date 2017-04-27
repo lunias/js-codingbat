@@ -74,4 +74,45 @@
     new Test([1, 9], true)
   ]);
 
+  // Warmup-1 > nearHundred
+
+  function nearHundred(n) {
+    return Math.abs(100 - n) <= 10
+      || Math.abs(200 - n) <= 10;
+  }
+
+  test(nearHundred, [
+    new Test([93], true),
+    new Test([90], true),
+    new Test([89], false),
+    new Test([200], true),
+    new Test([211], false)
+  ]);
+
+  // Warmup-1 > posNeg
+
+  function posNeg(a, b, negative) {
+    return negative ? a < 0 && b < 0
+      : a < 0 != b < 0;
+  }
+
+  test(posNeg, [
+    new Test([1, -1, false], true),
+    new Test([-1, 1, false], true),
+    new Test([-4, -5, true], true)
+  ]);
+
+  // Warmup-1 > notString
+
+  function notString(str) {
+    return str.match(/^not/) ? str
+      : 'not ' + str;
+  }
+
+  test(notString, [
+    new Test(['candy'], 'not candy'),
+    new Test(['x'], 'not x'),
+    new Test(['not bad'], 'not bad')
+  ]);
+
 })(TEST.Test, TEST.test);
