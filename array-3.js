@@ -25,36 +25,23 @@
 
   test(maxSpan, maxSpanTests);
 
-  // fixNums Helper (works, but doesn't keep in place)
+  // fixNums Helper
 
   function fixNums(nums, num1, num2) {
-    let locs = nums.reduce((locs, num, i) => {
-      if (num === num1) {
-        let one = locs.find(loc => !loc[num1]);
-        one ? one[num1] = i : locs.push({[num1]: i});
-      } else if (num === num2) {
-        let two = locs.find(loc => !loc[num2]);
-        two ? two[num2] = i : locs.push({[num2]: i});
+    let nonNums = nums.reduce((nonNums, num) => {
+      if (num != num1 && num != num2) {
+        nonNums.push(num);
       }
-      return locs;
+      return nonNums;
     }, []);
 
-    let indexMap = locs.reduce((map, loc) => {
-      let vals = Object.values(loc);
-      map[vals[0]] = vals[1];
-      return map;
-    }, {});
-
-    let fixed = nums.reduce((fixed, num, i, nums) => {
-      if (!Object.values(indexMap).includes(i)) {
-        fixed.push(num);
-        let oldLoc = indexMap[i];
-        oldLoc && fixed.push(nums[oldLoc]);
-      }
+    let idx = 0;
+    return fixed = nums.reduce((fixed, num, i, nums) => {
+      fixed.push(num == num1 ? num1
+                 : nums[i-1] == num1 ? num2
+                 : nonNums[idx++]);
       return fixed;
     }, []);
-
-    return fixed;
   }
 
   // Array-3 > fix34
@@ -70,5 +57,19 @@
   }
 
   test(fix34, fix34Tests);
+
+  // Array-3 > fix45
+
+  let fix45Tests = [
+    new Test([[5, 4, 9, 4, 9, 5]], [9, 4, 5, 4, 5, 9]),
+    new Test([[1, 4, 1, 5]], [1, 4, 5, 1]),
+    new Test([[1, 4, 1, 5, 5, 4, 1]], [1, 4, 5, 1, 1, 4, 5])
+  ];
+
+  function fix45(nums) {
+    return fixNums(nums, 4, 5);
+  }
+
+  test(fix45, fix45Tests);
 
 })(TEST.Test, TEST.test);
