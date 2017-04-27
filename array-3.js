@@ -34,7 +34,7 @@
     }, []);
 
     let idx = 0;
-    return fixed = nums.reduce((fixed, num, i, nums) => {
+    return nums.reduce((fixed, num, i, nums) => {
       fixed.push(num == num1 ? num1
                  : nums[i-1] == num1 ? num2
                  : nonNums[idx++]);
