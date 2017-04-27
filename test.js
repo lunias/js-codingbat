@@ -45,11 +45,14 @@ var TEST = (function() {
 
       try {
 
-        var result = func.apply(this, testArgs[i].args);
+        var args = testArgs[i].args;
+        var result = func.apply(this, args);
         var jsonResult = JSON.stringify(result);
         var jsonExpected = JSON.stringify(testArgs[i].expected);
+        var argsPrint = Array.isArray(args[0]) ? JSON.stringify(args[0])
+            : args.join(', ');
 
-        var resultHtml = funcName + '(' + JSON.stringify(testArgs[i].args[0]) + ') { ... } ';
+        var resultHtml = funcName + '(' + argsPrint + ') { ... } ';
 
         if (jsonExpected === jsonResult) {
 

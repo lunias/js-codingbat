@@ -52,6 +52,26 @@
 
   // Warmup-1 > parrotTrouble
 
+  function parrotTrouble(talking, hour) {
+    return talking && (hour < 7 || hour > 20);
+  }
 
+  test(parrotTrouble, [
+    new Test([true, 6], true),
+    new Test([true, 7], false),
+    new Test([false, 6], false)
+  ]);
+
+  // Warmup-1 > makes10
+
+  function makes10(a, b) {
+    return a == 10 || b == 10 || a + b == 10;
+  }
+
+  test(makes10, [
+    new Test([9, 10], true),
+    new Test([9, 9], false),
+    new Test([1, 9], true)
+  ]);
 
 })(TEST.Test, TEST.test);
