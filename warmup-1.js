@@ -39,7 +39,7 @@
   // Warmup-1 > diff21
 
   function diff21(n) {
-    let av = Math.abs(n - 21);
+    const av = Math.abs(n - 21);
     return n > 21 ? 2 * av : av;
   }
 
@@ -113,6 +113,135 @@
     new Test(['candy'], 'not candy'),
     new Test(['x'], 'not x'),
     new Test(['not bad'], 'not bad')
+  ]);
+
+  // Warmup-1 > missingChar
+
+  function missingChar(str, n) {
+    return str.slice(0, n) + str.slice(n + 1, str.length);
+  }
+
+  test(missingChar, [
+    new Test(['kitten', 1], 'ktten'),
+    new Test(['kitten', 0], 'itten'),
+    new Test(['kitten', 4], 'kittn')
+  ]);
+
+  // Warmup-1 > frontBack
+
+  function frontBack(str) {
+    return str.length < 2 ? str
+      : str[str.length - 1] + str.slice(1, str.length - 1) + str[0];
+  }
+
+  test(frontBack, [
+    new Test(['code'], 'eodc'),
+    new Test(['a'], 'a'),
+    new Test(['ab'], 'ba')
+  ]);
+
+  // Warmup-1 > front3
+
+  function front3(str) {
+    return str.slice(0, 3).repeat(3);
+  }
+
+  test(front3, [
+    new Test(['Java'], 'JavJavJav'),
+    new Test(['Chocolate'], 'ChoChoCho'),
+    new Test(['abc'], 'abcabcabc'),
+    new Test(['ab'], 'ababab')
+  ]);
+
+  // Warmup-1 > backAround
+
+  function backAround(str) {
+    const c = str[str.length - 1];
+    return c + str + c;
+  }
+
+  test(backAround, [
+    new Test(['cat'], 'tcatt'),
+    new Test(['Hello'], 'oHelloo'),
+    new Test(['a'], 'aaa')
+  ]);
+
+  // Warmup-1 > or35
+
+  function or35(n) {
+    return n % 3 === 0 || n % 5 === 0;
+  }
+
+  test(or35, [
+    new Test([3], true),
+    new Test([10], true),
+    new Test([8], false)
+  ]);
+
+  // Warmup-1 > front22
+
+  function front22(str) {
+    const s = str.slice(0, 2);
+    return s + str + s;
+  }
+
+  test(front22, [
+    new Test(['kitten'], 'kikittenki'),
+    new Test(['Ha'], 'HaHaHa'),
+    new Test(['abc'], 'ababcab')
+  ]);
+
+  // Warmup-1 > startHi
+
+  function startHi(str) {
+    return (str.match(/^hi/) || []).length === 1;
+  }
+
+  test(startHi, [
+    new Test(['hi there'], true),
+    new Test(['hi'], true),
+    new Test(['hello hi'], false)
+  ]);
+
+  // Warmup-1 > icyHot
+
+  function icyHot(t1, t2) {
+    return (t1 > 100 && t2 < 0)
+      || (t1 < 0 && t2 > 100);
+  }
+
+  test(icyHot, [
+    new Test([120, -1], true),
+    new Test([-1, 120], true),
+    new Test([2, 120], false)
+  ]);
+
+  // Warmup-1 > in1020
+
+  function in1020(a, b) {
+    return (a >= 10 && a <= 20)
+      || (b >= 10 && b <= 20);
+  }
+
+  test(in1020, [
+    new Test([12, 99], true),
+    new Test([21, 12], true),
+    new Test([8, 99], false)
+  ]);
+
+  // Warmup-1 > hasTeen
+
+  function hasTeen(a, b, c) {
+    for (i of [a, b, c])
+      if (i >= 13 && i <= 19) return true;
+    return false;
+  }
+
+  test(hasTeen, [
+    new Test([13, 20, 10], true),
+    new Test([20, 19, 10], true),
+    new Test([20, 10, 13], true),
+    new Test([0, 0, 0], false)
   ]);
 
 })(TEST.Test, TEST.test);
