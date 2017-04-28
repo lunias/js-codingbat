@@ -22,4 +22,163 @@
     new Test(['y2bz'], 2)
   ]);
 
+  // String-3 > withoutString
+
+  function withoutString(base, remove) {
+    return base.replace(new RegExp(remove, 'g'), '');
+  }
+
+  test(withoutString, [
+    new Test(['Hello there', 'llo'], 'He there'),
+    new Test(['Hello there', 'e'], 'Hllo thr'),
+    new Test(['Hello there', 'x'], 'Hello there')
+  ]);
+
+  // String-3 > equalIsNot
+
+  function equalsIsNot(str) {
+    return str.match(/is/g).length
+      === str.match(/not/g).length;
+  }
+
+  test(equalsIsNot, [
+    new Test(['This is not'], false),
+    new Test(['This is notnot'], true),
+    new Test(['noisxxnotyynotxisi'], true)
+  ]);
+
+  // String-3 > gHappy
+
+  function gHappy(str) {
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === 'g'
+          && str[i - 1] !== 'g'
+          && str[i + 1] !== 'g') return false;
+    }
+    return true;
+  }
+
+  test(gHappy, [
+    new Test(['xxggxx'], true),
+    new Test(['xxgxx'], false),
+    new Test(['xxggyygxx'], false)
+  ]);
+
+  // String-3 > countTriple
+
+  function countTriple(str) {
+    return [...str].reduce((count, c, i, str) => {
+      if (str[i - 1] === c && str[i + 1] === c)
+        return count + 1;
+      return count;
+    }, 0);
+  }
+
+  test(countTriple, [
+    new Test(['abcXXXabc'], 1),
+    new Test(['xxxabyyyycd'], 3),
+    new Test(['a'], 0)
+  ]);
+
+  // String-3 > sumDigits
+
+  function sumDigits(str) {
+    return (str.match(/[0-9]/g) || [])
+      .reduce((a, b) => +a + +b, 0);
+  }
+
+  test(sumDigits, [
+    new Test(['aa1bc2d3'], 6),
+    new Test(['aa11b33'], 8),
+    new Test(['Chocolate'], 0)
+  ]);
+
+  // String-3 > sameEnds
+
+  function sameEnds(str) {
+    let same = '', j = 0;
+    for (let i = Math.ceil(str.length / 2); i < str.length; i++) {
+      if (str[i] === str[j]) {
+        same += str[j++];
+      } else if (j > 0) {
+        j = 0;
+        same = '';
+      }
+    }
+    return same;
+  }
+
+  test(sameEnds, [
+    new Test(['abXYab'], 'ab'),
+    new Test(['xx'], 'x'),
+    new Test(['xxx'], 'x'),
+    new Test(['xxxx'], 'xx'),
+    new Test([''], ''),
+    new Test(['x'], '')
+  ]);
+
+  // String-3 > mirrorEnds
+
+  function mirrorEnds(str) {
+
+    let mirror = '';
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] !== str[str.length - i - 1]) return mirror;
+      mirror += str[i];
+    }
+    return mirror;
+  }
+
+  test(mirrorEnds, [
+    new Test(['abXYZba'], 'ab'),
+    new Test(['abca'], 'a'),
+    new Test(['aba'], 'aba'),
+    new Test(['x'], 'x')
+  ]);
+
+  // String-3 > maxBlock
+
+  function maxBlock(str) {
+    let max = 0, count = 0;
+    for (let i = 0; i < str.length; i++) {
+      str[i] === str[i - 1] ? max = Math.max(++count, max)
+        : count = 1;
+    }
+    return max;
+  }
+
+  test(maxBlock, [
+    new Test(['hoopla'], 2),
+    new Test(['abbCCCddBBBxx'], 3),
+    new Test([''], 0)
+  ]);
+
+  // String-3 > sumNumbers
+
+  function sumNumbers(str) {
+    return (str.match(/[0-9]+/g) || [])
+      .reduce((a, b) => +a + +b, 0);
+  }
+
+  test(sumNumbers, [
+    new Test(['abc123xyz'], 123),
+    new Test(['aa11b33'], 44),
+    new Test(['7 11'], 18),
+    new Test([''], 0),
+    new Test(['Chocolate'], 0)
+  ]);
+
+  // String-3 > notReplace
+
+  function notReplace(str) {
+    return str.replace(/\bis\b/g, 'is not');
+  }
+
+  test(notReplace, [
+    new Test(['is test'], 'is not test'),
+    new Test(['is-is'], 'is not-is not'),
+    new Test(['This is right'], 'This is not right'),
+    new Test(['crisis'], 'crisis')
+  ]);
+
 })(TEST.Test, TEST.test);

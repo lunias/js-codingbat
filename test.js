@@ -99,7 +99,7 @@ var TEST = (function() {
       panelHeading.textContent += ' - ' + failCount + ' Test Failure(s)';
     }
 
-    await sleep((numTests++) * 150);
+    await sleep((numTests++) * 10);
     panel.classList.add('fade');
   };
 

@@ -150,7 +150,7 @@
   function maxMirror(nums) {
     let slices = [];
     slices.push([]);
-    for (let i = 1; i < nums.length; i++) {
+    for (let i = 1; i < nums.length + 1; i++) {
       slices.push([]);
       for (let j = 0; i + j <= nums.length; j++) {
         slices[i][j] = nums.slice(j, i + j);
@@ -159,9 +159,9 @@
 
     let hitCount = 0;
     for (let i = slices.length - 1; i > 0; i--) {
-      for (let k = 0; k < slices[i].length; k++) {
-        for (let j = nums.length - 1; j >= 0; j--) {
-          if (nums[j] === slices[i][k][hitCount]) {
+      for (let j = 0; j < slices[i].length; j++) {
+        for (let k = nums.length - 1; k >= 0; k--) {
+          if (nums[k] === slices[i][j][hitCount]) {
             if (++hitCount === i) return i;
           } else {
             hitCount = 0;
@@ -176,7 +176,32 @@
   test(maxMirror, [
     new Test([[1, 2, 3, 8, 9, 3, 2, 1]], 3),
     new Test([[1, 2, 1, 4]], 3),
-    new Test([[7, 1, 2, 9, 7, 2, 1]], 2)
+    new Test([[7, 1, 2, 9, 7, 2, 1]], 2),
+    new Test([[2, 2]], 2),
+    new Test([[1]], 1),
+    new Test([[]], 0)
+  ]);
+
+  // Array-3 > countClumps
+
+  function countClumps(nums) {
+    let inClump = false;
+    return nums.reduce((numClumps, num, i, nums) => {
+      if (num === nums[i - 1]) {
+        inClump = true;
+      } else if (inClump) {
+        inClump = false;
+        return numClumps + 1;
+      }
+      return i === nums.length - 1 && inClump ? numClumps + 1
+        : numClumps;
+    }, 0);
+  }
+
+  test(countClumps, [
+    new Test([[1, 2, 2, 3, 4, 4]], 2),
+    new Test([[1, 1, 2, 1, 1]], 2),
+    new Test([[1, 1, 1, 1, 1]], 1)
   ]);
 
 })(TEST.Test, TEST.test);
