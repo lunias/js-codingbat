@@ -157,12 +157,10 @@
       }
     }
 
-    console.log(slices);
-
+    let hitCount = 0;
     for (let i = slices.length - 1; i > 0; i--) {
-      let hitCount = 0;
-      for (let j = nums.length - 1; j >= 0; j--) {
-        for (let k = 0; k < slices[i].length; k++) {
+      for (let k = 0; k < slices[i].length; k++) {
+        for (let j = nums.length - 1; j >= 0; j--) {
           if (nums[j] === slices[i][k][hitCount]) {
             if (++hitCount === i) return i;
           } else {
@@ -176,9 +174,9 @@
   }
 
   test(maxMirror, [
-    //new Test([[1, 2, 3, 8, 9, 3, 2, 1]], 3),
+    new Test([[1, 2, 3, 8, 9, 3, 2, 1]], 3),
     new Test([[1, 2, 1, 4]], 3),
-    //new Test([[7, 1, 2, 9, 7, 2, 1]], 2)
+    new Test([[7, 1, 2, 9, 7, 2, 1]], 2)
   ]);
 
 })(TEST.Test, TEST.test);
