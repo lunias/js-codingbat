@@ -120,7 +120,6 @@
   // String-3 > mirrorEnds
 
   function mirrorEnds(str) {
-
     let mirror = '';
     for (let i = 0; i < str.length; i++) {
       if (str[i] !== str[str.length - i - 1]) return mirror;
