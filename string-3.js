@@ -180,4 +180,19 @@
     new Test(['crisis'], 'crisis')
   ]);
 
+  // String-? > countChars
+
+  function countChars(str) {
+    return [...str].reduce((counts, c) => {
+      counts[c] = (counts[c] || 0) + 1;
+      return counts;
+    }, {});
+  }
+
+  test(countChars, [
+    new Test(['ethan'], {'e': 1, 't': 1, 'h': 1, 'a': 1, 'n': 1}),
+    new Test(['abba'], {'a': 2, 'b': 2}),
+    new Test(['possessionlessness'], {'p': 1, 'o': 2, 's': 8, 'e': 3, 'i': 1, 'n': 2, 'l': 1})
+  ]);
+
 })(TEST.Test, TEST.test);
