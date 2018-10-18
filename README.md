@@ -2,6 +2,10 @@
 
 This is a very simple project for checking your answers to codingbat exercises implemented in JavaScript
 
+Screenshot:
+
+![ScreenShot](https://raw.github.com/lunias/js-codingbat/master/screenshot.png)
+
 Example of how to write answers to the exercises and test them:
 
 ```javascript
