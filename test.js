@@ -14,6 +14,7 @@ var TEST = (function() {
   test.test = async function(func, testArgs) {
 
     var funcName = func.name;
+    var funcString = func.toString();
 
     var panel = document.createElement('div');
     panel.classList.add('panel');
@@ -34,6 +35,11 @@ var TEST = (function() {
     panelBody.appendChild(results);
 
     document.getElementById('results').appendChild(panel);
+
+    var header = document.createElement('li');
+    header.innerHTML = '<pre class="prettyprint lang-javascript">' + funcString + '</pre>';
+    header.classList.add('list-group-item');
+    results.appendChild(header);
 
     var failCount = 0;
     var hadSuccess = false;
